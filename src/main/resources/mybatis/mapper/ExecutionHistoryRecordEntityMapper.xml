@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test.testpl.Dao.mapper.ExecutionHistoryRecordEntityMapper">
+  <resultMap id="BaseResultMap" type="com.test.testpl.Dao.entity.ExecutionHistoryRecordEntity">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="caseId" jdbcType="INTEGER" property="caseId" />
+    <result column="apiDefinitionId" jdbcType="INTEGER" property="apiDefinitionId" />
+    <result column="executeTime" jdbcType="TIMESTAMP" property="executeTime" />
+    <result column="executor" jdbcType="VARCHAR" property="executor" />
+    <result column="executeResult" jdbcType="INTEGER" property="executeResult" />
+    <result column="RequestHeaders" jdbcType="VARCHAR" property="requestHeaders" />
+    <result column="RequestBody" jdbcType="VARCHAR" property="requestBody" />
+    <result column="ResponseCode" jdbcType="VARCHAR" property="responseCode" />
+    <result column="ResponseHeaders" jdbcType="VARCHAR" property="responseHeaders" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.test.testpl.Dao.entity.ExecutionHistoryRecordEntity">
+    <result column="ResponseBody" jdbcType="LONGVARCHAR" property="responseBody" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, caseId, apiDefinitionId, executeTime, executor, executeResult, RequestHeaders, 
+    RequestBody, ResponseCode, ResponseHeaders
+  </sql>
+  <sql id="Blob_Column_List">
+    ResponseBody
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from executionhistoryrecord
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectByCaseId" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select *
+    from executionhistoryrecord
+    where caseId = #{caseId,jdbcType=INTEGER}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from executionhistoryrecord
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insert" parameterType="com.test.testpl.Dao.entity.ExecutionHistoryRecordEntity" useGeneratedKeys="true" keyProperty="id">
+    insert into executionhistoryrecord (id, caseId, apiDefinitionId, 
+      executeTime, executor, executeResult, 
+      RequestHeaders, RequestBody, ResponseCode, 
+      ResponseHeaders, ResponseBody)
+    values (#{id,jdbcType=INTEGER}, #{caseId,jdbcType=INTEGER}, #{apiDefinitionId,jdbcType=INTEGER}, 
+      #{executeTime,jdbcType=TIMESTAMP}, #{executor,jdbcType=VARCHAR}, #{executeResult,jdbcType=INTEGER},
+      #{requestHeaders,jdbcType=VARCHAR}, #{requestBody,jdbcType=VARCHAR}, #{responseCode,jdbcType=VARCHAR}, 
+      #{responseHeaders,jdbcType=VARCHAR}, #{responseBody,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.test.testpl.Dao.entity.ExecutionHistoryRecordEntity" useGeneratedKeys="true" keyProperty="id">
+    insert into executionhistoryrecord
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="caseId != null">
+        caseId,
+      </if>
+      <if test="apiDefinitionId != null">
+        apiDefinitionId,
+      </if>
+      <if test="executeTime != null">
+        executeTime,
+      </if>
+      <if test="executor != null">
+        executor,
+      </if>
+      <if test="executeResult != null">
+        executeResult,
+      </if>
+      <if test="requestHeaders != null">
+        RequestHeaders,
+      </if>
+      <if test="requestBody != null">
+        RequestBody,
+      </if>
+      <if test="responseCode != null">
+        ResponseCode,
+      </if>
+      <if test="responseHeaders != null">
+        ResponseHeaders,
+      </if>
+      <if test="responseBody != null">
+        ResponseBody,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="caseId != null">
+        #{caseId,jdbcType=INTEGER},
+      </if>
+      <if test="apiDefinitionId != null">
+        #{apiDefinitionId,jdbcType=INTEGER},
+      </if>
+      <if test="executeTime != null">
+        #{executeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="executor != null">
+        #{executor,jdbcType=VARCHAR},
+      </if>
+      <if test="executeResult != null">
+        #{executeResult,jdbcType=INTEGER},
+      </if>
+      <if test="requestHeaders != null">
+        #{requestHeaders,jdbcType=VARCHAR},
+      </if>
+      <if test="requestBody != null">
+        #{requestBody,jdbcType=VARCHAR},
+      </if>
+      <if test="responseCode != null">
+        #{responseCode,jdbcType=VARCHAR},
+      </if>
+      <if test="responseHeaders != null">
+        #{responseHeaders,jdbcType=VARCHAR},
+      </if>
+      <if test="responseBody != null">
+        #{responseBody,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.test.testpl.Dao.entity.ExecutionHistoryRecordEntity">
+    update executionhistoryrecord
+    <set>
+      <if test="caseId != null">
+        caseId = #{caseId,jdbcType=INTEGER},
+      </if>
+      <if test="apiDefinitionId != null">
+        apiDefinitionId = #{apiDefinitionId,jdbcType=INTEGER},
+      </if>
+      <if test="executeTime != null">
+        executeTime = #{executeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="executor != null">
+        executor = #{executor,jdbcType=VARCHAR},
+      </if>
+      <if test="executeResult != null">
+        executeResult = #{executeResult,jdbcType=INTEGER},
+      </if>
+      <if test="requestHeaders != null">
+        RequestHeaders = #{requestHeaders,jdbcType=VARCHAR},
+      </if>
+      <if test="requestBody != null">
+        RequestBody = #{requestBody,jdbcType=VARCHAR},
+      </if>
+      <if test="responseCode != null">
+        ResponseCode = #{responseCode,jdbcType=VARCHAR},
+      </if>
+      <if test="responseHeaders != null">
+        ResponseHeaders = #{responseHeaders,jdbcType=VARCHAR},
+      </if>
+      <if test="responseBody != null">
+        ResponseBody = #{responseBody,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.test.testpl.Dao.entity.ExecutionHistoryRecordEntity">
+    update executionhistoryrecord
+    set caseId = #{caseId,jdbcType=INTEGER},
+      apiDefinitionId = #{apiDefinitionId,jdbcType=INTEGER},
+      executeTime = #{executeTime,jdbcType=TIMESTAMP},
+      executor = #{executor,jdbcType=VARCHAR},
+      executeResult = #{executeResult,jdbcType=INTEGER},
+      RequestHeaders = #{requestHeaders,jdbcType=VARCHAR},
+      RequestBody = #{requestBody,jdbcType=VARCHAR},
+      ResponseCode = #{responseCode,jdbcType=VARCHAR},
+      ResponseHeaders = #{responseHeaders,jdbcType=VARCHAR},
+      ResponseBody = #{responseBody,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.test.testpl.Dao.entity.ExecutionHistoryRecordEntity">
+    update executionhistoryrecord
+    set caseId = #{caseId,jdbcType=INTEGER},
+      apiDefinitionId = #{apiDefinitionId,jdbcType=INTEGER},
+      executeTime = #{executeTime,jdbcType=TIMESTAMP},
+      executor = #{executor,jdbcType=VARCHAR},
+      executeResult = #{executeResult,jdbcType=INTEGER},
+      RequestHeaders = #{requestHeaders,jdbcType=VARCHAR},
+      RequestBody = #{requestBody,jdbcType=VARCHAR},
+      ResponseCode = #{responseCode,jdbcType=VARCHAR},
+      ResponseHeaders = #{responseHeaders,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test.testpl.Dao.mapper.AssertRuleEntityMapper">
+  <resultMap id="BaseResultMap" type="com.test.testpl.Dao.entity.AssertRuleEntity">
+    <id column="ruleId" jdbcType="INTEGER" property="ruleId" />
+    <result column="apiExecutionId" jdbcType="INTEGER" property="apiExecutionId" />
+    <result column="assertType" jdbcType="VARCHAR" property="assertType" />
+    <result column="expectedValue" jdbcType="VARCHAR" property="expectedValue" />
+    <result column="expression" jdbcType="VARCHAR" property="expression" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ruleId, apiExecutionId, assertType, expectedValue,expression
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from assertrule
+    where ruleId = #{ruleId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from assertrule
+    where ruleId = #{ruleId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.test.testpl.Dao.entity.AssertRuleEntity">
+    insert into assertrule (ruleId, apiExecutionId, assertType, 
+      expectedValue,expression)
+    values (#{ruleId,jdbcType=INTEGER}, #{apiExecutionId,jdbcType=INTEGER}, #{assertType,jdbcType=VARCHAR}, 
+      #{expectedValue,jdbcType=VARCHAR}, #{expression,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.test.testpl.Dao.entity.AssertRuleEntity">
+    insert into assertrule
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ruleId != null">
+        ruleId,
+      </if>
+      <if test="apiExecutionId != null">
+        apiExecutionId,
+      </if>
+      <if test="assertType != null">
+        assertType,
+      </if>
+      <if test="expectedValue != null">
+        expectedValue,
+      </if>
+      <if test="expression != null">
+        expression,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ruleId != null">
+        #{ruleId,jdbcType=INTEGER},
+      </if>
+      <if test="apiExecutionId != null">
+        #{apiExecutionId,jdbcType=INTEGER},
+      </if>
+      <if test="assertType != null">
+        #{assertType,jdbcType=VARCHAR},
+      </if>
+      <if test="expectedValue != null">
+        #{expectedValue,jdbcType=VARCHAR},
+      </if>
+      <if test="expression != null">
+        #{expression,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.test.testpl.Dao.entity.AssertRuleEntity">
+    update assertrule
+    <set>
+      <if test="apiExecutionId != null">
+        apiExecutionId = #{apiExecutionId,jdbcType=INTEGER},
+      </if>
+      <if test="assertType != null">
+        assertType = #{assertType,jdbcType=VARCHAR},
+      </if>
+      <if test="expectedValue != null">
+        expectedValue = #{expectedValue,jdbcType=VARCHAR},
+      </if>
+      <if test="expression != null">
+        expression = #{expression,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ruleId = #{ruleId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.test.testpl.Dao.entity.AssertRuleEntity">
+    update assertrule
+    set apiExecutionId = #{apiExecutionId,jdbcType=INTEGER},
+      assertType = #{assertType,jdbcType=VARCHAR},
+      expectedValue = #{expectedValue,jdbcType=VARCHAR},
+      expression = #{expression,jdbcType=VARCHAR}
+    where ruleId = #{ruleId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<org.apache.jmeter.save.ScriptWrapper>
+  <version></version>
+  <testPlan serialization="custom">
+    <org.apache.jorphan.collections.HashTree>
+      <default>
+        <data>
+          <java.util.Map_-Entry>
+            <org.apache.jmeter.testelement.TestPlan>
+              <propMap class="java.util.Collections$SynchronizedMap"

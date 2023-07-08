@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test.testpl.Dao.mapper.AssertHistoryRecordEntityMapper">
+  <resultMap id="BaseResultMap" type="com.test.testpl.Dao.entity.AssertHistoryRecordEntity">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="ruleId" jdbcType="INTEGER" property="ruleId" />
+    <result column="actualVaule" jdbcType="VARCHAR" property="actualVaule" />
+    <result column="assertResult" jdbcType="VARCHAR" property="assertResult" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, ruleId, actualVaule, assertResult
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from asserthistoryrecord
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from asserthistoryrecord
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.test.testpl.Dao.entity.AssertHistoryRecordEntity">
+    insert into asserthistoryrecord (id, ruleId, actualVaule, 
+      assertResult)
+    values (#{id,jdbcType=INTEGER}, #{ruleId,jdbcType=INTEGER}, #{actualVaule,jdbcType=VARCHAR}, 
+      #{assertResult,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.test.testpl.Dao.entity.AssertHistoryRecordEntity">
+    insert into asserthistoryrecord
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="ruleId != null">
+        ruleId,
+      </if>
+      <if test="actualVaule != null">
+        actualVaule,
+      </if>
+      <if test="assertResult != null">
+        assertResult,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="ruleId != null">
+        #{ruleId,jdbcType=INTEGER},
+      </if>
+      <if test="actualVaule != null">
+        #{actualVaule,jdbcType=VARCHAR},
+      </if>
+      <if test="assertResult != null">
+        #{assertResult,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.test.testpl.Dao.entity.AssertHistoryRecordEntity">
+    update asserthistoryrecord
+    <set>
+      <if test="ruleId != null">
+        ruleId = #{ruleId,jdbcType=INTEGER},
+      </if>
+      <if test="actualVaule != null">
+        actualVaule = #{actualVaule,jdbcType=VARCHAR},
+      </if>
+      <if test="assertResult != null">
+        assertResult = #{assertResult,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.test.testpl.Dao.entity.AssertHistoryRecordEntity">
+    update asserthistoryrecord
+    set ruleId = #{ruleId,jdbcType=INTEGER},
+      actualVaule = #{actualVaule,jdbcType=VARCHAR},
+      assertResult = #{assertResult,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

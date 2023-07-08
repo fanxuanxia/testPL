@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <baseURL>https://api.btstu.cn/yan/api.php</baseURL>
+    <headers>
+        <head name="Content-Type" value="application/json"></head>
+        <head name="Connection" value="keep-alive"></head>
+        <head name="Accept-Language" value="zh-CN,zh;q=0.9"></head>
+    </headers>
+    <bodyParams>
+        <bodyParam name ="para1" value ="fxx"></bodyParam>
+    </bodyParams>
+</root>

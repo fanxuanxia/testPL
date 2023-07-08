@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test.testpl.Dao.mapper.TestCaseEntityMapper">
+  <resultMap id="BaseResultMap" type="com.test.testpl.Dao.entity.TestCaseEntity">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="priority" jdbcType="VARCHAR" property="priority" />
+    <result column="relativeApi" jdbcType="VARCHAR" property="relativeApi" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="headers" jdbcType="VARCHAR" property="headers" />
+    <result column="resquestBody" jdbcType="VARCHAR" property="resquestBody" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, name, description, priority, relativeApi, status,headers,resquestBody
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from testcase
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectByStatus"  parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    *
+    from testcase where status = #{status, jdbcType=VARCHAR} limit 1000;
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from testcase
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insert" parameterType="com.test.testpl.Dao.entity.TestCaseEntity" useGeneratedKeys="true" keyProperty="id">
+    insert into testcase (id, name, description, 
+      priority, relativeApi, status,headers,resquestBody
+      )
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
+      #{priority,jdbcType=VARCHAR}, #{relativeApi,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR},
+            #{headers,jdbcType=VARCHAR}, #{resquestBody,jdbcType=VARCHAR}
+      )
+  </insert>
+
+  <insert id="insertSelective" parameterType="com.test.testpl.Dao.entity.TestCaseEntity" useGeneratedKeys="true" keyProperty="id">
+    insert into testcase
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="priority != null">
+        priority,
+      </if>
+      <if test="relativeApi != null">
+        relativeApi,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="headers != null">
+        headers,
+      </if>
+      <if test="resquestBody != null">
+        resquestBody,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="priority != null">
+        #{priority,jdbcType=VARCHAR},
+      </if>
+      <if test="relativeApi != null">
+        #{relativeApi,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if><if test="headers != null">
+        #{headers,jdbcType=VARCHAR},
+      </if><if test="resquestBody != null">
+        #{resquestBody,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.test.testpl.Dao.entity.TestCaseEntity">
+    update testcase
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="priority != null">
+        priority = #{priority,jdbcType=VARCHAR},
+      </if>
+      <if test="relativeApi != null">
+        relativeApi = #{relativeApi,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="headers != null">
+        headers = #{headers,jdbcType=VARCHAR},
+      </if>
+      <if test="requestBody != null">
+        requestBody = #{requestBody,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.test.testpl.Dao.entity.TestCaseEntity">
+    update testcase
+    set name = #{name,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      priority = #{priority,jdbcType=VARCHAR},
+      relativeApi = #{relativeApi,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      headers = #{headers,jdbcType=VARCHAR},
+      requestBody = #{requestBody,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateStatus" >
+    update testcase
+    set status = #{status,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
